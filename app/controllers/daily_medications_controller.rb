@@ -1,22 +1,20 @@
 class DailyMedicationsController < ApplicationController
-end
-class UsersController < ApplicationController
   def index
-    @users = User.all
+    @daily_medications = Daily_Medication.all
   end
 
   def show
-    @user = User.find(params[:id])
+    @Daily_Medication = Daily_Medication.find(params[:id])
   end
 
   def new
-    @user = User.new
+    @daily_medication = Daily_Medication.new
   end
 
   def create
-    @user = User.new(user_params)
+    @daily_medication = Daily_Medication.new(user_params)
 
-    if @user.save
+    if @daily_medication.save
       redirect_to @user
     else
       render 'new'
@@ -24,13 +22,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @daily_medication = Daily_Medication.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+    @daily_medication = Daily_Medication.find(params[:id])
 
-    if @user.update(user_params)
+    if @daily_medication.update(daily_medication_params)
       redirect_to @user
     else
       render 'edit'
@@ -38,14 +36,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    @daily_medication = Daily_Medication.find(params[:id])
+    @daily_medication.destroy
 
-    redirect_to users_path
+    redirect_to daily_medications_path
   end
 
   private
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    def daily_medication_params
+      params.require(:daily_medication).permit(:name, :email, :password, :password_confirmation)
     end
 end

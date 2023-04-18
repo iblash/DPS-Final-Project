@@ -1,51 +1,49 @@
 class DoctorsController < ApplicationController
-end
-class UsersController < ApplicationController
   def index
-    @users = User.all
+    @doctors = Doctor.all
   end
 
   def show
-    @user = User.find(params[:id])
+    @dotor = Doctor.find(params[:id])
   end
 
   def new
-    @user = User.new
+    @dotor = Doctor.new
   end
 
   def create
-    @user = User.new(user_params)
+    @dotor = Doctor.new(doctor_params)
 
-    if @user.save
-      redirect_to @user
+    if @doctor.save
+      redirect_to @doctor
     else
       render 'new'
     end
   end
 
   def edit
-    @user = User.find(params[:id])
+    @doctor = Doctor.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+    @doctor = Doctor.find(params[:id])
 
-    if @user.update(user_params)
-      redirect_to @user
+    if @doctor.update(doctor_params)
+      redirect_to @doctor
     else
       render 'edit'
     end
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    @doctor = Doctor.find(params[:id])
+    @doctor.destroy
 
-    redirect_to users_path
+    redirect_to doctors_path
   end
 
   private
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    def doctor_params
+      params.require(:doctor).permit(:name, :email, :password, :password_confirmation)
     end
 end

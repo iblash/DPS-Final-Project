@@ -1,51 +1,49 @@
 class PrescriptionsController < ApplicationController
-end
-class UsersController < ApplicationController
   def index
-    @users = User.all
+    @prescriptions = Prescription.all
   end
 
   def show
-    @user = User.find(params[:id])
+    @prescriptions = Prescriptions.find(params[:id])
   end
 
   def new
-    @user = User.new
+    @prescriptions = Prescriptions.new
   end
 
   def create
-    @user = User.new(user_params)
+    @prescription = Prescription.new(prescription_params)
 
-    if @user.save
-      redirect_to @user
+    if @prescription.save
+      redirect_to @prescription
     else
       render 'new'
     end
   end
 
   def edit
-    @user = User.find(params[:id])
+    @prescription = Prescription.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+    @prescription = Prescription.find(params[:id])
 
-    if @user.update(user_params)
-      redirect_to @user
+    if @prescription.update(prescription_params)
+      redirect_to @prescription
     else
       render 'edit'
     end
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    @prescription = Prescriptions.find(params[:id])
+    @prescription.destroy
 
-    redirect_to users_path
+    redirect_to prescriptions_path
   end
 
   private
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    def prescription_params
+      params.require(:prescription).permit(:name, :email, :password, :password_confirmation)
     end
 end
